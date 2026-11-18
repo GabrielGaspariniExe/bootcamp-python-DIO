@@ -13,7 +13,7 @@
             Os valores devem ser exibidos utilizando o formato R$ xxx.xx,exemplo:
             1500.45 = R$ 1500.45
 '''
-
+#menu de opções do sistema bancário
 menu = """
 
 Bem vindo ao JurandasBank
@@ -28,11 +28,15 @@ Bem vindo ao JurandasBank
 saldo = 0
 limite = 500
 extrato = ""
+valor_sacado = 0
 numero_saques = 0
 LIMITES_SAQUES = 3
 
+# Laço de repetição que contém as opções possíveis para serem realizadas do sistema.
 while True:
     opcao = input(menu)
+    # Na primeira operação nos recebemos um valor do usuário e realizamos a validação do valor, se é positivo ou negativo.
+    # E após finalizar armazenamos na variável global "saldo"
     if opcao == "D":
         print ("Depositar\n")
         while True:
@@ -41,13 +45,23 @@ while True:
                 print("O valor deve conter apenas números positivos.")
             else:
                 break
-            saldo = deposito
+        saldo += deposito
             
-    elif opcao == "S" and numero_saques :
-        print ("Sacar")
-        quantidades_saques -= LIMITES_SAQUES
-        if LIMITES_SAQUES >= 1 and saque :
-            
+    elif opcao == "S":
+        numero_saques += 1
+        if numero_saques > LIMITES_SAQUES:
+            print("Você não pode realizar essa operação defido ao limite de saque diário excedido, volte amanhã.\n Agradecemos por usar o JurandasBank!")
+            break
+        else:
+            valor_sacado = int(input("Digite o valor que você deseja sacar: R$"))
+            while True:
+                if valor_sacado > limite:
+                    valor_sacado = int(input("Não é permitio realizar essa operação, saque é maior que R$500\nDigite outro valor: R$"))
+                elif valor_sacado > saldo:
+                    valor_sacado = int(input(f"O valor para saque excede o valor do saldo atual.\nSaldo atual é de R${saldo}.\nFavor digitar um valor válido para a operação: R$"))
+                else:
+                    print(f"Realizando saque no valor de R${valor_sacado}.")
+                    break
 
     #elif opcao == "E":
         #print ("Extrato")
@@ -60,6 +74,7 @@ while True:
         print("Escolha uma das opções com a correspondência exata.")
 
 print(deposito)
+print(valor_sacado)
 
 
 
