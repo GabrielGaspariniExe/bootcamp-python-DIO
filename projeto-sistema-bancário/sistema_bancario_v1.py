@@ -26,9 +26,9 @@ Bem vindo ao JurandasBank
 => """
 
 # Variáveis que iremos usar para tratar os valores de cada operação e saldo do usuário
-saldo = 0
-limite = 500
-valor_sacado = 0
+saldo = 0.0
+limite = 500.0
+valor_sacado = 0.0
 
 # Variável para armazenarmos mensagem de extrato
 extrato = ""
@@ -48,7 +48,7 @@ while True:
     # E após finalizar armazenamos na variável global "saldo"
     if opcao == "D":
         print ("\nDepositar\n")
-        deposito = 0
+        deposito = 0.0
         while True:
             deposito = int(input("Digite o valor que você deseja depositar: R$"))
             if deposito <= 0:
@@ -56,7 +56,7 @@ while True:
             else:
                 print(f"Foi depositado o valor de R${deposito}.")
                 break
-        numero_depositos += deposito
+        quantia_depositos += deposito
         saldo += deposito
 
     # Aqui criamos a opção sacar, onde limitamos para apenas 3 saques diários atráves do tratamento de condicionais.
@@ -77,7 +77,7 @@ while True:
                 else:
                     print(f"Saque no valor de R${valor_sacado} realizado.")
                     break
-            numero_saques += valor_sacado
+            quantia_saques += valor_sacado
             saldo -= valor_sacado
 
     elif opcao == "E":
